@@ -16,8 +16,6 @@ const generateRandomString = function() {
   return randomString;
 }
 
-console.log(generateRandomString());
-
 const urlDatabase = {
   
   "b2xVn2": "http://www.lighthouselabs.ca",
@@ -35,7 +33,7 @@ app.get("/urls", (req, res) => {
 
 app.post("/urls", (req, res) => {
   console.log(req.body);
-  res.send("Ok");
+  res.send(generateRandomString());
 });
 
 app.get("/urls/new", (req, res) => {
