@@ -51,7 +51,6 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.get("/urls/:shortURL", (req, res) => {
-  // req.params.shortURL === userinput after urls/
   let shortURL = req.params.shortURL;
   let templateVars = { shortURL, longURL: urlDatabase[shortURL] };
   res.render("urls_show", templateVars);
@@ -63,6 +62,14 @@ app.get("/urls.json", (req, res) => {
 
 app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
+});
+
+// DELETE a URL
+app.post("/urls/:shortURL/delete", (req, res) => {
+  // console.log("User is trying to delete a url");
+  const shortURL = req.params.shortURL;
+  delete urlDatabase[shortURL];
+  res.redirect("/urls");
 });
 
 app.listen(PORT, () => {

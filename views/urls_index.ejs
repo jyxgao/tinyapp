@@ -19,6 +19,10 @@
             <tr>
               <td><%= url %></td>
               <td><%= urls[url] %></td>
+              <td><form class="form-inline" method="POST" action="/urls/<%= url %>/delete">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+              </td>
             </tr>
           <% } %>
         </tbody>
