@@ -9,7 +9,7 @@
         <a class="nav-item nav-link" href="/urls">My URLs</a>
         <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
       <% if (username !== undefined) { %>
-          <span class="navbar-text">Logged In as: <%= username %> </span>
+          <span class="navbar-text">Logged In As: <%= username %> </span>
           <form clas="form-inline" method="POST" action="/logout">
             <button type="submit" class="btn btn-sm btn-primary" style="margin: 0.4em">Log Out</button>
           </form>
