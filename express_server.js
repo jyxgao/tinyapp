@@ -142,15 +142,15 @@ app.post("/logout", (req, res) => {
 
 app.post("/register", (req, res) => {
   // check for empty input and if user email is already registered
-  if (!req.body.email || !req.body.password) {
+  const email = req.body.email;
+  const password = req.body.password;
+  if (!email || !password) {
     res.status(400).send("Invalid email or password");
-  } else if (getUserByEmail(req.body.email, users)) {
+  } else if (getUserByEmail(email, users)) {
     res.status(400).send("Email already registered, please login");
   } else {
     // if no errors, register user with bcrypt and set cookie
     const userId = generateRandomId(6);
-    const email = req.body.email;
-    const password = req.body.password;
           bcrypt
             .genSalt(10)
             .then((salt) => {
