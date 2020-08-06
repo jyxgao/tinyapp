@@ -4,6 +4,7 @@ const PORT = 3000;
 const bodyParser = require('body-parser');
 // const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
 const bcrypt = require('bcrypt');
 const { 
   generateRandomId, 
@@ -12,11 +13,11 @@ const {
 } = require('./helpers');
 
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(cookieParser());
 app.use(cookieSession({
   name: 'user_id',
   keys: ['key1']
 }));
+app.use(methodOverride('_method'));
 
 app.set("view engine", "ejs");
 
@@ -180,7 +181,7 @@ app.post("/urls", (req, res) => {
 });
 
 // DELETE a URL
-app.post("/urls/:shortURL/delete", (req, res) => {
+app.delete("/urls/:shortURL", (req, res) => {
   const shortURL = req.params.shortURL;
   if (req.session.user_id === urlDatabase[shortURL]["userID"]) {
     delete urlDatabase[shortURL];
@@ -191,7 +192,7 @@ app.post("/urls/:shortURL/delete", (req, res) => {
 });
 
 // MODIFY a URL
-app.post("/urls/:shortURL", (req, res) => {
+app.put("/urls/:shortURL", (req, res) => {
   const shortURL = req.params.shortURL;
   if (req.session.user_id === urlDatabase[shortURL]["userID"]) {
     urlDatabase[req.params.shortURL]["longURL"] = req.body.longURL;
