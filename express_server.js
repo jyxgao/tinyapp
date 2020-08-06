@@ -46,6 +46,15 @@ const urlsForUserId = function(userId, urlDB) {
   return urlsFiltered;
 };
 
+// checks if current cookie userID exists
+const checkCookie = function(cookieValue) {
+  for (const account in users) {
+    if (account["id"] === cookieValue) {
+      return true;
+    }
+  }
+}
+
 const urlDatabase = {
   "b2xVn2": { longURL: "http://www.lighthouselabs.ca", userID: "userRandomID" },
   "9sm5xK": { longURL: "http://www.google.com", userID: "userRandomID" }
@@ -134,12 +143,13 @@ app.get("/u/:shortURL", (req, res) => {
 app.get("/urls", (req, res) => {
   if (!req.cookies["user_id"]) {
     res.redirect('login');
+  } else {
+    let templateVars = { 
+      urls: urlsForUserId(req.cookies["user_id"], urlDatabase),
+      user: users[req.cookies["user_id"]]
+    }
+    res.render("urls_index", templateVars);
   }
-  let templateVars = { 
-    urls: urlsForUserId(req.cookies["user_id"], urlDatabase),
-    user: users[req.cookies["user_id"]]
-  }
-  res.render("urls_index", templateVars);
 });
 
 app.post("/urls", (req, res) => {
@@ -159,8 +169,9 @@ app.get("/urls/new", (req, res) => {
 
   if (!req.cookies["user_id"]) {
     res.redirect('/login');
+  } else {
+    res.render("urls_new", templateVars);
   }
-  res.render("urls_new", templateVars);
 });
 
 app.get("/urls/:shortURL", (req, res) => {
@@ -191,7 +202,7 @@ app.post("/urls/:shortURL/delete", (req, res) => {
     delete urlDatabase[shortURL];
     res.redirect("/urls");
   } else {
-    res.redirect("/login");
+    res.redirect("/login")
   }
 });
 
