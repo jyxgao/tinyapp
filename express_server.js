@@ -91,10 +91,10 @@ app.post("/login", (req, res) => {
       res.cookie('user_id', id);
       res.redirect('/urls');
     } else {
-      res.send(403, "Incorrect password")
+      return res.status(403).send("Incorrect password")
     }
   } else {
-    res.send(403, "Cannot find email")
+    return res.status(403).send("Cannot find email")
   }
 });
 
