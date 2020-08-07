@@ -37,8 +37,6 @@ const timeStamp = function() {
   return currentTime;
 };
 
-console.log(timeStamp());
-
 module.exports = {
   generateRandomId,
   getUserByEmail,
