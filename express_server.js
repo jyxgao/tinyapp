@@ -21,14 +21,8 @@ app.use(methodOverride('_method'));
 
 app.set("view engine", "ejs");
 
-const urlDatabase = {
-  "b2xVn2": { longURL: "http://www.lighthouselabs.ca", userID: "userRandomID" , visitCount: 0, timeStamp: null },
-  "9sm5xK": { longURL: "http://www.google.com", userID: "userRandomID", visitCount: 0, timeStamp: null }
-};
-
-const users = {
-
-};
+const urlDatabase = {};
+const users = {};
 
 app.get("/", (req, res) => {
   res.redirect("/login");
@@ -53,10 +47,14 @@ app.get("/login", (req, res) => {
 
 // register new user page
 app.get("/register", (req, res) => {
-  let templateVars = {
-    user: users[req.session.user_id]
-  };
-  res.render('register', templateVars);
+  if (req.session.user_id) {
+    res.redirect('/urls');
+  } else {
+    let templateVars = {
+      user: users[req.session.user_id]
+    };
+    res.render('register', templateVars);
+  }
 });
 
 // add new URL if user is logged in, or redirect to login page
