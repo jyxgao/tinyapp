@@ -16,6 +16,7 @@ const getUserByEmail = function(email, db) {
     }
   }
 };
+
 // filters a urlDatabase for those that have a matching userID to user logged in
 const urlsForUserId = function(userId, urlDB) {
   let urlsFiltered = {};

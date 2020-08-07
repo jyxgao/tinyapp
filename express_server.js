@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const bcrypt = require('bcrypt');
