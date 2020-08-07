@@ -1,7 +1,7 @@
 const { assert, expect } = require('chai');
 
-const { 
-  getUserByEmail, 
+const {
+  getUserByEmail,
   generateRandomId,
   urlsForUserId
 } = require('../helpers');
@@ -9,13 +9,13 @@ const {
 // Constants for Test Code
 const testUsers = {
   "userRandomID": {
-    id: "userRandomID", 
-    email: "user@example.com", 
+    id: "userRandomID",
+    email: "user@example.com",
     password: "purple-monkey-dinosaur"
   },
   "user2RandomID": {
-    id: "user2RandomID", 
-    email: "user2@example.com", 
+    id: "user2RandomID",
+    email: "user2@example.com",
     password: "dishwasher-funk"
   }
 };
@@ -56,7 +56,7 @@ describe('urlsForUserId', function() {
     const expected = {
       "b2xVn2": { longURL: "http://www.lighthouselabs.ca" },
       "kj4K10": { longURL: "http://www.facebook.com" }
-    }
+    };
     expect(actual).to.eql(expected);
   });
 });
