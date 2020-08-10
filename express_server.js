@@ -28,14 +28,6 @@ app.get("/", (req, res) => {
   res.redirect("/login");
 });
 
-app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
-});
-
-app.get("/hello", (req, res) => {
-  res.send("<html><body>Hello <b>World</b></body></html>\n");
-});
-
 // login users
 app.get("/login", (req, res) => {
   let templateVars = {
@@ -74,7 +66,7 @@ app.get("/urls/new", (req, res) => {
 app.get("/urls", (req, res) => {
   if (users[req.session.user_id] === undefined) {
     req.session = null;
-    res.send("Not logged in, please login/register");
+    res.redirect("/login");
   } else {
     let templateVars = {
       urls: urlsForUserId(req.session.user_id, urlDatabase),
